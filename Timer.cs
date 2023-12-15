@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
     public int minutes;
     public float seconds;
+    public TextMeshProUGUI timerText;
 
-    // Цикл обновления составляет примерно 0.01 секунды
+    // Р¦РёРєР» РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРѕСЃС‚Р°РІР»СЏРµС‚ РїСЂРёРјРµСЂРЅРѕ 0.01 СЃРµРєСѓРЅРґС‹
     void Update()
     {
         seconds -= Time.deltaTime;
@@ -23,10 +25,14 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                // Если таймер остановился, перезагружаем текущую сцену
+                // Р•СЃР»Рё С‚Р°Р№РјРµСЂ РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ, РїРµСЂРµР·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСѓС‰СѓСЋ СЃС†РµРЅСѓ
                 int sceneIndex = SceneManager.GetActiveScene().buildIndex;
                 SceneManager.LoadScene(sceneIndex);
             }
         }
+
+        //РћРєСЂСѓРіР»СЏРµРј Р·РЅР°С‡РµРЅРёРµ СЃРµРєСѓРЅРґ РґРѕ С†РµР»С‹С… РґР»СЏ РёС… РІС‹РІРѕРґР° РЅР° СЌРєСЂР°РЅ
+        int roundSeconds = Mathf.RoundToInt(seconds);
+        timerText.text = minutes + ":" + roundSeconds;
     }
 }
